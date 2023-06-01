@@ -26,5 +26,9 @@
   "bugs": {
     "url": "https://github.com/Financial-Times/next-tech-interview-exercise/issues"
   },
-  "homepage": "https://github.com/Financial-Times/next-tech-interview-exercise#readme"
+  "homepage": "https://github.com/Financial-Times/next-tech-interview-exercise#readme",
+  "peerDependencies": {
+    "@financial-times/o-colors": "^6.6.0",
+    "@financial-times/o-typography": "^7.4.1"
+  }
 }
