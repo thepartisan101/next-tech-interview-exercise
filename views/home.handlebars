@@ -1,8 +1,9 @@
 <div class="stock-tickers">
   {{#each stocks as |stock|}}
     <div class="ticker">
-      <h5>{{stock.name}}</h2>
-      <h5 class="daily-change">{{stock.oneDayChange}}%</h5>
+      <h5 >{{stock.name}}</h2>
+      {{!-- Add origami typography and helper function for conditional styles --}}
+      <h6 class="o-typography-heading-level-6 daily-change {{changeColor this.oneDayChange}}">{{stock.oneDayChange}}%</h5>
     </div>
   {{/each}}
 </div>
