@@ -1,7 +1,7 @@
 const express = require('express');
 const expressHandlebars  = require('express-handlebars');
 const path = require('path');
-// const getStockData = require('./lib/fetch');
+const getStockData = require('./lib/fetch');
 
 // Create express handlebars instance to register helper functions
 const hbs = expressHandlebars.create({});
@@ -50,42 +50,15 @@ app.use('/static', express.static(path.join(__dirname, 'static')));
  * The index route. Your logic here-ish.
 */
 app.get('/', async function (req, res) {
-    // Create mapping of stock symbols to names
-    const symbolToName = {
-        "FTSE:FSI": "FTSE 100",
-        "INX:IOM": "S&P 500",
-        "EURUSD": "Euro/Dollar",
-        "GBPUSD": "Pound/Dollar",
-        "IB.1:IEU": "Brent Crude Oil"
-      };
-      
-    // Import mockData from sample
-    const stockData = require('./lib/data/mockData.json');
-    // console.log(stockData.items[0]); 
-    
-    let stocks = [];
-    // Filter for stock name, clean it and format values
-    for (let stock of stockData.items) {
-        let name = symbolToName[stock.basic.symbol];
-        let oneDayChange = parseFloat(stock.quote.change1DayPercent.toFixed(2));
-        stocks.push({ name: name, oneDayChange: oneDayChange });
-    }
 
-    // console.log(stocks)
+    // Fetch stock data
+    const stocks = await getStockData();
+
+    console.log(stocks);
+F
     const templateData = {
-        // Add test data
         stocks: stocks
     };
-
-    // TODO: Get API access keys
-    // Get stock data
-    // const stocks = await getStockData();
-
-    // // This object is passed to the Handlebars template.
-    // const templateData = {
-    //     stocks: stocks
-    // };
-    // End TODO
 
     // This renders the Handlebars view at `views/home.handlebars`.
     res.render('home', templateData);
