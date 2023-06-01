@@ -81,4 +81,7 @@ We would like you to display the information from the following symbols (these a
 6. Imported JSON mock data from a real API response into app.js, created a mapping object to assign clean ticker names to those given by the API.
 7. Created a helper function to style conditionally the ticker's 1 Day % Change based on the value being positive or negative
 
+**Result**
+![Task result](https://rseoane.sirv.com/result.png)
+
 </details>
