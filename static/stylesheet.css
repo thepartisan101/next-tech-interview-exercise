@@ -23,3 +23,9 @@ body {
     gap: 4px;
     padding: 5px;
 }
+
+.daily-change {
+    border-radius: 1px;
+    border-color: #9cd321;
+    color: #9cd321;
+}
