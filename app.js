@@ -61,7 +61,7 @@ app.get('/', async function (req, res) {
       
     // Import mockData from sample
     const stockData = require('./lib/data/mockData.json');
-    console.log(stockData.items[0]); 
+    // console.log(stockData.items[0]); 
     
     let stocks = [];
     // Filter for stock name, clean it and format values
@@ -71,7 +71,7 @@ app.get('/', async function (req, res) {
         stocks.push({ name: name, oneDayChange: oneDayChange });
     }
 
-    console.log(stocks)
+    // console.log(stocks)
     const templateData = {
         // Add test data
         stocks: stocks
