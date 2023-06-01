@@ -45,13 +45,18 @@ app.get('/', async function (req, res) {
         name: 'world',
         // Add test data
         stocks: [
-            { ticker: 'AAPL', oneDayChange: 1.2 },
-            { ticker: 'GOOGL', oneDayChange: -0.8 },
-            { ticker: 'AMZN', oneDayChange: 0.3 },
-            { ticker: 'TSLA', oneDayChange: 2.5 },
-            { ticker: 'MSFT', oneDayChange: 0.7 },
+            { ticker: 'AAPL', oneDayChange: 1.2234 },
+            { ticker: 'GOOGL', oneDayChange: -0.8345 },
+            { ticker: 'AMZN', oneDayChange: 0.3023 },
+            { ticker: 'TSLA', oneDayChange: 2.5234 },
+            { ticker: 'MSFT', oneDayChange: 0.7102 },
         ],
     };
+
+    // Test: OneDayChange data needs to be rounded to two decimals
+    for (let stock of templateData.stocks) {
+        stock.oneDayChange = stock.oneDayChange.toFixed(2);
+    }
 
     // This renders the Handlebars view at `views/home.handlebars`.
     res.render('home', templateData);
