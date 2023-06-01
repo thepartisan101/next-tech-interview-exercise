@@ -3,7 +3,7 @@
 
 <details>
     <summary><b>Problem statement</b><hr></summary>
-    
+
 
 Using the library you built at home, [fetch some financial securities data](#using-our-securities-quotes-api) (also known as stock prices), and use it to populate a client-side component with their percentage change for the day. It could look something like the following.
 
@@ -52,13 +52,14 @@ We would like you to display the information from the following symbols (these a
 
 <details>
   <summary><b>Solution</b></summary>
-  
+
 ## Task review
 - Front end: Define minimum set of components: Ticker area + ticker components [name + daily change(%)]
 - Back end: call FT market data API, retrieve data and filter response to needed data.
 
 **Important points**
-- API can't be accessed without API keys after trying it in the browser. 
+~~- API can't be accessed without API keys after trying it in the browser. ~~
+- The provided API url is correct -> when going to the docs endpoint it redirects to the oficial URL (which needs authentication)
 
 **Workaround**
 - Found the docs by playing with the URL, used the playground to see the API response structure.
@@ -73,13 +74,14 @@ We would like you to display the information from the following symbols (these a
 
 ### Back End
 
-3. Created fetch.js getStockData()  function to test endpoint, confirmed it can't be accessed. 
+3. Created fetch.js getStockData()  function to test endpoint, confirmed it can't be accessed.
 
 ### Front End
 4. Modified the stocks sample array to add floats with several decimals as in the API response, added a function to round the numbers
 5. Modified template and styles to get the tickers closer to FT's landing page look. Added typography and color packages from FT's Origami library.
 6. Imported JSON mock data from a real API response into app.js, created a mapping object to assign clean ticker names to those given by the API.
 7. Created a helper function to style conditionally the ticker's 1 Day % Change based on the value being positive or negative
+8. Realized the original API works vs https://markets.ft.com/research/webservices/securities/v1/quotes?symbols=FTSE:FSI,INX:IOM,EURUSD,GBPUSD,IB.1:IEU -> Added back fetch.js
 
 **Result**
 ![Task result](https://rseoane.sirv.com/result.png)
