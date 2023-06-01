@@ -1,7 +1,16 @@
 const express = require('express');
 const expressHandlebars  = require('express-handlebars');
 const path = require('path');
-const getStockData = require('./lib/fetch');
+// const getStockData = require('./lib/fetch');
+
+// Create express handlebars instance to register helper functions
+const hbs = expressHandlebars.create({});
+
+// Return "positive" or "negative" string depending on input value
+// Will be used to add an extra class to the ticker % value
+hbs.handlebars.registerHelper('changeColor', function(value) {
+    return value >= 0 ? 'positive' : 'negative';
+});
 
 /**
  * Require in your library here.
@@ -21,7 +30,7 @@ const port = process.env.PORT || 3000;
 *
 * The default layout is `views/layouts/main.handlebars`.
 */
-app.engine('handlebars', expressHandlebars());
+app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
 /**
@@ -71,9 +80,9 @@ app.get('/', async function (req, res) {
     // TODO: Get API access keys
     // Get stock data
     // const stocks = await getStockData();
+
     // // This object is passed to the Handlebars template.
     // const templateData = {
-    //     // Add test data
     //     stocks: stocks
     // };
     // End TODO
