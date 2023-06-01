@@ -1,1 +1,8 @@
-Hello {{ name }}!
+<div class="stock-tickers">
+  {{#each stocks as |stock|}}
+    <div class="ticker">
+      <h5>{{stock.ticker}}</h2>
+      <p class="daily-change">{{stock.oneDayChange}}%</p>
+    </div>
+  {{/each}}
+</div>
