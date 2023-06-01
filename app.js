@@ -42,7 +42,15 @@ app.use('/static', express.static(path.join(__dirname, 'static')));
 app.get('/', async function (req, res) {
     // This object is passed to the Handlebars template.
     const templateData = {
-        name: 'world'
+        name: 'world',
+        // Add test data
+        stocks: [
+            { ticker: 'AAPL', oneDayChange: 1.2 },
+            { ticker: 'GOOGL', oneDayChange: -0.8 },
+            { ticker: 'AMZN', oneDayChange: 0.3 },
+            { ticker: 'TSLA', oneDayChange: 2.5 },
+            { ticker: 'MSFT', oneDayChange: 0.7 },
+        ],
     };
 
     // This renders the Handlebars view at `views/home.handlebars`.
