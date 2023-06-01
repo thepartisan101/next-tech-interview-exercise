@@ -1,4 +1,9 @@
 # Customer Products Technical Interview
+*By Ruben Seoane*
+
+<details>
+    <summary><b>Problem statement</b><hr></summary>
+    
 
 Using the library you built at home, [fetch some financial securities data](#using-our-securities-quotes-api) (also known as stock prices), and use it to populate a client-side component with their percentage change for the day. It could look something like the following.
 
@@ -42,3 +47,11 @@ We would like you to display the information from the following symbols (these a
 | Euro/Dollar     | `EURUSD`   |
 | Pound/Dollar    | `GBPUSD`   |
 | Brent Crude Oil | `IB.1:IEU` |
+
+</details>
+
+<details>
+  <summary><b>Solution</b></summary>
+  
+  To be continued
+</details>
