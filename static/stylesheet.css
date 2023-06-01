@@ -12,6 +12,7 @@ body {
     background-color: black;
     color: white;
     padding: 5px 8px 5px 8px;
+    max-height: 2rem;
 }
 
 .ticker {
@@ -21,11 +22,25 @@ body {
     justify-content: space-between;
     align-items: center;
     gap: 4px;
-    padding: 5px;
+    /* padding: 5px; */
+    margin-left: 20px;
+
 }
 
 .daily-change {
-    border-radius: 1px;
+    padding: 2px;
+    padding-left: 4px;
+    border-radius: 4px;
+}
+
+.positive {
+    border: 1px solid #9cd321;
     border-color: #9cd321;
     color: #9cd321;
+}
+
+.negative {
+    border: 1px solid #FF1966;
+    border-color: #FF1966;
+    color: #FF1966;
 }
