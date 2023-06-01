@@ -1,6 +1,7 @@
 const express = require('express');
 const expressHandlebars  = require('express-handlebars');
 const path = require('path');
+const getStockData = require('./lib/fetch');
 
 /**
  * Require in your library here.
@@ -15,11 +16,11 @@ const port = process.env.PORT || 3000;
 
 /**
  * Configure the Handlebars view engine with the express app.
- *
- * Views with a `.handlebars` extension will be parsed with this Handlebars view engine.
- *
- * The default layout is `views/layouts/main.handlebars`.
- */
+*
+* Views with a `.handlebars` extension will be parsed with this Handlebars view engine.
+*
+* The default layout is `views/layouts/main.handlebars`.
+*/
 app.engine('handlebars', expressHandlebars());
 app.set('view engine', 'handlebars');
 
@@ -29,34 +30,53 @@ app.set('view engine', 'handlebars');
  * Assets in the `static/` folder can be loaded using the `/static` path.
  *
  * @example
- *
- * ```html
- * <link rel="stylesheet" type="text/css" href="/static/stylesheet.css">
- * ```
- */
+*
+* ```html
+* <link rel="stylesheet" type="text/css" href="/static/stylesheet.css">
+* ```
+*/
 app.use('/static', express.static(path.join(__dirname, 'static')));
 
 /**
  * The index route. Your logic here-ish.
- */
+*/
 app.get('/', async function (req, res) {
-    // This object is passed to the Handlebars template.
+    // Create mapping of stock symbols to names
+    const symbolToName = {
+        "FTSE:FSI": "FTSE 100",
+        "INX:IOM": "S&P 500",
+        "EURUSD": "Euro/Dollar",
+        "GBPUSD": "Pound/Dollar",
+        "IB.1:IEU": "Brent Crude Oil"
+      };
+      
+    // Import mockData from sample
+    const stockData = require('./lib/data/mockData.json');
+    console.log(stockData.items[0]); 
+    
+    let stocks = [];
+    // Filter for stock name, clean it and format values
+    for (let stock of stockData.items) {
+        let name = symbolToName[stock.basic.symbol];
+        let oneDayChange = parseFloat(stock.quote.change1DayPercent.toFixed(2));
+        stocks.push({ name: name, oneDayChange: oneDayChange });
+    }
+
+    console.log(stocks)
     const templateData = {
-        name: 'world',
         // Add test data
-        stocks: [
-            { ticker: 'AAPL', oneDayChange: 1.2234 },
-            { ticker: 'GOOGL', oneDayChange: -0.8345 },
-            { ticker: 'AMZN', oneDayChange: 0.3023 },
-            { ticker: 'TSLA', oneDayChange: 2.5234 },
-            { ticker: 'MSFT', oneDayChange: 0.7102 },
-        ],
+        stocks: stocks
     };
 
-    // Test: OneDayChange data needs to be rounded to two decimals
-    for (let stock of templateData.stocks) {
-        stock.oneDayChange = stock.oneDayChange.toFixed(2);
-    }
+    // TODO: Get API access keys
+    // Get stock data
+    // const stocks = await getStockData();
+    // // This object is passed to the Handlebars template.
+    // const templateData = {
+    //     // Add test data
+    //     stocks: stocks
+    // };
+    // End TODO
 
     // This renders the Handlebars view at `views/home.handlebars`.
     res.render('home', templateData);
